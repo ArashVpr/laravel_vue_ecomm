@@ -3,12 +3,22 @@ import Dashboard from '../views/Dashboard.vue'
 import Login from '../views/Login.vue'
 import ResetPassword from '../views/ResetPassword.vue'
 import RequestResetPassword from '../views/RequestResetPassword.vue'
+import AppLayout from '../components/AppLayout.vue'
 
 const routes = [
     {
-        path: '/dashboard',
-        name: 'dashboard',
-        component: Dashboard
+        path: '/app',
+        name: 'app',
+        component: AppLayout,
+        children: [
+            {
+                path: 'dashboard',
+                name: 'app.dashboard',
+                component: Dashboard
+            },
+
+
+        ]
     },
     {
         path: '/login',
