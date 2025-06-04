@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Dashboard from '../views/Dashboard.vue'
 import Products from '../views/Products.vue'
 import Login from '../views/Login.vue'
+import NotFoundPage from '../views/NotFoundPage.vue'
 import ResetPassword from '../views/ResetPassword.vue'
 import RequestResetPassword from '../views/RequestResetPassword.vue'
 import AppLayout from '../components/AppLayout.vue'
@@ -26,8 +27,6 @@ const routes = [
                 name: 'app.products',
                 component: Products
             },
-
-
         ]
     },
     {
@@ -44,7 +43,12 @@ const routes = [
         path: '/reset-password/:token',
         name: 'resetPassword',
         component: ResetPassword
-    }
+    },
+    {
+        path: '/:pathMatch(.*)*',
+        name: 'notFound',
+        component: NotFoundPage
+    },
 ]
 
 const router = createRouter({
