@@ -14,10 +14,10 @@ export function login({commit}, data) {
 // The "logout" action is like the waiter handling the guest's check-out request.
 export function logout({ commit }) {
     return axiosClient.post('/logout') // Sends the logout request to the backend (Laravel).
-    .then(() => {
+    .then((response) => {
         // Once the backend confirms the check-out, the waiter clears the user's profile and security badge from the pantry (state).
-        commit('setUser', null) // Removes the user's profile information from the pantry (state).
         commit('setToken', null) // Removes the user's security badge (authentication token) from the pantry (state).
         return response // Returns the response for further use if needed.
+        
     })
 }

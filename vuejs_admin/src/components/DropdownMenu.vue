@@ -23,7 +23,7 @@
                 <div class="px-1 py-1">
                     <MenuItem v-slot="{ active }">
                     <button :class="[
-                        active ? 'bg-indigo-700 text-white' : 'text-gray-900',
+                        active ? 'bg-indigo-700 text-white cursor-pointer' : 'text-gray-900',
                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                     ]">
                         <UserIcon :active="active" class="mr-2 h-5 w-5 text-violet-400" aria-hidden="true" />
@@ -32,9 +32,9 @@
                     </MenuItem>
                     <MenuItem v-slot="{ active }">
                     <button :class="[
-                        active ? 'bg-indigo-700 text-white' : 'text-gray-900',
+                        active ? 'bg-indigo-700 text-white cursor-pointer' : 'text-gray-900',
                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                    ]">
+                    ]" @click="logout">
                         <ArrowUturnLeftIcon :active="active" class="mr-2 h-5 w-5 text-violet-400" aria-hidden="true" />
                         Logout
                     </button>
@@ -49,6 +49,15 @@
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { ChevronDownIcon } from '@heroicons/vue/20/solid'
 import { UserIcon, ArrowUturnLeftIcon } from '@heroicons/vue/24/outline'
+import store from '../store'
+import router from '../router'
+
+function logout() {
+   store.dispatch('logout')
+   .then(() => {
+    router.push({ name: 'login' })
+   })
+}
 
 
 </script>
