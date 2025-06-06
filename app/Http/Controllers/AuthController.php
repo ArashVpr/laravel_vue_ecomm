@@ -25,8 +25,8 @@ class AuthController extends Controller
             ], 422);
         }
 
+        /** @var \App\Models\User $user */
         $user = Auth::user();
-
         if ($user->role !== 'admin') {
             Auth::logout();
 
@@ -41,8 +41,7 @@ class AuthController extends Controller
             'token' => $token,
         ], 200);
 
-        // Authentication failed
-        return response(['success' => 'Aauthorized'], 200);
+        return response(['message' => 'Authorized'], 200);
     }
 
     public function logout()
