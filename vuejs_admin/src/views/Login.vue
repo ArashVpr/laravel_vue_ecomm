@@ -1,6 +1,12 @@
 <template>
     <GuestLayout title="Sign in to your account">
+        <div v-if="logoutMessage" class="text-green-500 text-center text-sm mb-4 font-semibold rounded-md p-2 bg-green-50">
+            {{ logoutMessage }}
+        </div>
         <form class="space-y-6" method="POST" @submit.prevent="login">
+            <div v-if="errorMsg" class="text-red-500 text-center text-sm mb-4 font-semibold rounded-md p-2 bg-red-50">
+                {{ errorMsg }}
+            </div>
             <div>
                 <label for="email" class="block text-sm/6 font-medium text-gray-900">Email address</label>
                 <div class="mt-2">
@@ -30,8 +36,13 @@
             </div>
             <div>
                 <button type="submit" :disabled="loading"
-                    class="cursor-pointer flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign
-                    in</button>
+                    class="cursor-pointer flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" 
+                    :class="{
+                        'hover:cursor-not-allowed opacity-50': loading,
+                    }"
+                    >
+                    <svg v-if="loading" class="mr-3 -ml-1 size-5 animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" ></path></svg>
+                    Sign in</button>
             </div>
         </form>
     </GuestLayout>
@@ -44,6 +55,10 @@ import GuestLayout from '../components/GuestLayout.vue';
 import { ref } from 'vue'
 import router from '../router';
 import store from '../store';
+
+import { computed } from 'vue';
+
+const logoutMessage = computed(() => store.state.logoutMessage); // Get the logout message
 
 // The "loading" state is like the "processing" sign at the front desk during check-in.
 let loading = ref(false)
@@ -75,8 +90,7 @@ function login() {
             // If the system rejects the guest's details, the receptionist stops processing.
             loading.value = false
             // An error message is displayed to the guest, explaining why their check-in failed.
-            // errorMsg.value = 'Login failed. Please try again.'
-            errorMsg.value = response.data.message || 'Login failed. Please try again.'
+            errorMsg.value = response.data.message
         })
 }
 </script>

@@ -19,6 +19,7 @@
 import Sidebar from './Sidebar.vue';
 import Navbar from './Navbar.vue';
 import { ref, onMounted, onUnmounted } from 'vue';
+import store from '../store';
 
 const sidebarOpen = ref(true);
 
@@ -28,6 +29,9 @@ function toggleSidebar() {
 }
 
 onMounted(() => {
+
+    store.dispatch('getUser'); // Fetch user data when component mounts
+
     handleResize()
     window.addEventListener('resize', handleResize)
 })

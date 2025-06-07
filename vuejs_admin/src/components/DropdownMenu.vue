@@ -51,13 +51,19 @@ import { ChevronDownIcon } from '@heroicons/vue/20/solid'
 import { UserIcon, ArrowUturnLeftIcon } from '@heroicons/vue/24/outline'
 import store from '../store'
 import router from '../router'
+import { ref } from 'vue'
+
+let errorMsg = ref('')
 
 function logout() {
-   store.dispatch('logout')
-   .then(() => {
-    router.push({ name: 'login' })
-   })
+    store.dispatch('logout')
+        .then((response) => {
+            store.commit('setLogoutMessage', response.data.message); // Save the message in Vuex
+            router.push({ name: 'login' }); // Redirect to login page
+        })
+        .catch((error) => {
+            console.error('Logout failed:', error);
+        });
 }
-
 
 </script>

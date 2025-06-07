@@ -39,6 +39,7 @@ axiosClient.interceptors.response.use(
         // Reject the package and let the company handle the issue.
         // return Promise.reject
         console.error(error)
+        return Promise.reject(error)
 
     }
 )

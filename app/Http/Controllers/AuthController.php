@@ -21,7 +21,7 @@ class AuthController extends Controller
 
         if (!Auth::attempt($credentials, $remember)) {
             return response([
-                'message' => 'Email or password in incorrect.'
+                'message' => 'Email or password is incorrect.'
             ], 422);
         }
 
@@ -50,6 +50,8 @@ class AuthController extends Controller
         $user = Auth::user();
         $user->tokens()->delete();
 
-        return response(['message' => 'Logged out successfully'], 204);
+        return response([
+            'message' => 'Logged out successfully'
+        ], 200);
     }
 }

@@ -14,3 +14,7 @@ export function setToken(state, token) {
         sessionStorage.removeItem('TOKEN')
     }
 }
+
+export function setLogoutMessage(state, message) {
+    state.logoutMessage = message; // Set the logout message
+}
