@@ -7,7 +7,7 @@
                     class="rounded-full h-10 w-10">
 
                 <div class="flex items-center text-sm font-semibold ml-2">
-                    John Doe
+                    {{ userName }}
                     <ChevronDownIcon class="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
                 </div>
 
@@ -51,9 +51,12 @@ import { ChevronDownIcon } from '@heroicons/vue/20/solid'
 import { UserIcon, ArrowUturnLeftIcon } from '@heroicons/vue/24/outline'
 import store from '../store'
 import router from '../router'
-import { ref } from 'vue'
 
-let errorMsg = ref('')
+import { computed } from 'vue'
+
+const userName = computed(() => store.state.user.data.name); // Get the user's name from Vuex
+
+
 
 function logout() {
     store.dispatch('logout')

@@ -56,7 +56,7 @@ import { ref } from 'vue'
 import router from '../router';
 import store from '../store';
 
-import { computed } from 'vue';
+import { computed } from 'vue'
 
 const logoutMessage = computed(() => store.state.logoutMessage); // Get the logout message
 

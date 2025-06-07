@@ -1,12 +1,12 @@
 import axiosClient from "../axios"
 
+
 export function getUser({commit}) {
     return axiosClient.get('/user') // Sends the guest's login details to the backend (Laravel).
         .then(response => {
-            commit('setUser', response.data)
+            commit('setUser', response.data) // sends the guest's profile information to mutations
             return response // Returns the response for further use if needed.
-        
-    })
+        })
 }
 
 // The "login" action is like the waiter taking the guest's check-in request and sending it to the hotel's central system (API).

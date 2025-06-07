@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    function getUser(Request $request)
+    {
+        return $request->user()->only(['id', 'name', 'email']);
+    }
+    
     function login(Request $request)
     {
         // Validate the request data
