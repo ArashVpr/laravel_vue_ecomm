@@ -2,12 +2,8 @@
   <h1>Dashboard</h1>
 </template>
 
-<script>
-export default {
+<script setup>
+import login from './Login.vue';
 
-}
 </script>
 
-<style>
-
-</style>

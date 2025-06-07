@@ -7,7 +7,7 @@
                     class="rounded-full h-10 w-10">
 
                 <div class="flex items-center text-sm font-semibold ml-2">
-                    John Doe
+                    {{ userName }}
                     <ChevronDownIcon class="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
                 </div>
 
@@ -23,7 +23,7 @@
                 <div class="px-1 py-1">
                     <MenuItem v-slot="{ active }">
                     <button :class="[
-                        active ? 'bg-indigo-700 text-white' : 'text-gray-900',
+                        active ? 'bg-indigo-700 text-white cursor-pointer' : 'text-gray-900',
                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                     ]">
                         <UserIcon :active="active" class="mr-2 h-5 w-5 text-violet-400" aria-hidden="true" />
@@ -32,9 +32,9 @@
                     </MenuItem>
                     <MenuItem v-slot="{ active }">
                     <button :class="[
-                        active ? 'bg-indigo-700 text-white' : 'text-gray-900',
+                        active ? 'bg-indigo-700 text-white cursor-pointer' : 'text-gray-900',
                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                    ]">
+                    ]" @click="logout">
                         <ArrowUturnLeftIcon :active="active" class="mr-2 h-5 w-5 text-violet-400" aria-hidden="true" />
                         Logout
                     </button>
@@ -49,6 +49,24 @@
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { ChevronDownIcon } from '@heroicons/vue/20/solid'
 import { UserIcon, ArrowUturnLeftIcon } from '@heroicons/vue/24/outline'
+import store from '../store'
+import router from '../router'
 
+import { computed } from 'vue'
+
+const userName = computed(() => store.state.user.data.name); // Get the user's name from Vuex
+
+
+
+function logout() {
+    store.dispatch('logout')
+        .then((response) => {
+            store.commit('setLogoutMessage', response.data.message); // Save the message in Vuex
+            router.push({ name: 'login' }); // Redirect to login page
+        })
+        .catch((error) => {
+            console.error('Logout failed:', error);
+        });
+}
 
 </script>
