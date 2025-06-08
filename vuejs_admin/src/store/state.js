@@ -3,5 +3,6 @@ export default {
     user: {
         token: sessionStorage.getItem('TOKEN'), // User's authentication token, stored in sessionStorage for persistence
         data: {}
-    }
+    },
+    products: {}, // State to hold the list of products
 }

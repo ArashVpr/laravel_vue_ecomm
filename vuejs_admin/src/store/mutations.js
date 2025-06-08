@@ -2,6 +2,9 @@
 export function setUser(state, user) {
     state.user.data = user // Stores the user's profile information in the pantry (state).
 }
+export function setProducts(state, products) {
+    state.products = products // Stores the list of products in the pantry (state).
+}
 
 // The "setToken" mutation is like the chef updating the pantry with the user's security badge (authentication token).
 export function setToken(state, token) {
