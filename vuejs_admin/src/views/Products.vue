@@ -15,7 +15,7 @@ import { computed, onMounted } from 'vue';
 const products = computed(() => store.state.products);
 
 onMounted(() => {
-  store.dispatch('getProducts'); // Fetch products when component mounts
+  store.dispatch('getProducts') // Fetch products when component mounts
 })
 
 </script>
