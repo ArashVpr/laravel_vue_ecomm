@@ -8,11 +8,10 @@ export function getUser({commit}) {
             return response // Returns the response for further use if needed.
         })
 }
-export function getProducts({commit}) {
-    return axiosClient.get('/products')  // Sends a request to the backend (Laravel) to fetch the list of products.
+export function getProducts({commit}, url = '/products') {
+    return axiosClient.get(url)  // Sends a request to the backend (Laravel) to fetch the list of products.
         .then(response => { // Once the backend responds with the list of products, the waiter updates the pantry (state) with the products.
             commit('setProducts', response.data) // Stores the list of products in the pantry (state).
-            console.log(response) // Logs the entire response received from the backend.
             return response
         })
 }
